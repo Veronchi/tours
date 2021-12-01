@@ -11,13 +11,11 @@ function createTour(dataArr) {
 
   let tourCard = dataArr.map(({ id, name, info, image, price }) => {
 
-    // const [shortInfo, setShortInfo] = useState({infoText: shortenInfo(info), btnText: 'read more'});
-    // const [fullInfo, setFullInfo] = useState({infoText: info, btnText: 'show less'})
-    // const [isShort, setIsShort] = useState(true);
+    const [isShortInfo, setIsShortInfo] = useState(true);
+    const [shortInfo, setShortInfo] = useState({infoText: shortenInfo(info), btnText: 'read more'});
+    const [fullInfo, setFullInfo] = useState({infoText: info, btnText: 'show less'});
 
-    // const updateInfo = () => {
-    //   setStateInfo()
-    // }
+    let content = isShortInfo ? shortInfo : fullInfo;
 
     return (
       <article key={id} className="single-tour">
@@ -28,8 +26,8 @@ function createTour(dataArr) {
             <h4 className="tour-price">${price}</h4>
           </div>
           <p>
-            {info}
-            <button>read more</button>
+            {content.infoText}
+            <button onClick={() => setIsShortInfo(!isShortInfo)}>{content.btnText}</button>
           </p>
           <button className="delete-btn">not interested</button>
         </footer>
